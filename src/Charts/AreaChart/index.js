@@ -6,59 +6,59 @@ import Axis from '../../compoents/Axis';
 import {View} from 'react-native';
 import DataFrame from '../../utils/DataFrame';
 import moment from 'moment';
+import WebView from 'react-native-webview';
+import Area_Chart from './area-chart.html';
 
 const GRAPH_MARGIN = 20;
 const SVGHeight = 300;
 const SVGWidth = wp('90%');
-const height = SVGHeight - 2 * GRAPH_MARGIN;
-const width = SVGWidth - 2 * GRAPH_MARGIN;
+const Height = SVGHeight - 2 * GRAPH_MARGIN;
+const Width = SVGWidth - 2 * GRAPH_MARGIN;
 
-export default function AreaChart({data, style, svgStyle}) {
+const makeArea = ({data, width, height}) => {
   const df = new DataFrame({data});
-  const x = d3
-    .scaleUtc()
-    .domain(d3.extent(data, d => d.x))
-    .range([15, width - 15]);
 
-  const y = d3
-    .scaleLinear()
-    .domain([0, d3.max(data, d => d.y)])
-    .nice()
-    .range([height - 15, 15]);
+  const xDomain = [df.minXs(), df.maxXs()];
+  const yDomain = [df.minYs(), df.maxYs()];
+
+  const xRange = [15, width + 15];
+  const yRange = [height - 15, 15];
+
+  const x = d3.scaleLinear().domain(d3.range(xDomain[1])).range(xRange);
+  const y = d3.scaleLinear().domain(yDomain).range(yRange);
 
   const area = d3
     .area()
-    .curve(d3.curveBasis)
+    .curve(d3.curveLinear)
     .x(d => x(d.x))
-    .y0(y(0))
-    .y1(d => y(d.y));
+    .y1(d => y(d.y))
+    .y0(y(0));
 
-  const yDomain = d3.range(df.maxYs() + 6);
-  const yRange = [height - 15, 15];
-  const yAxis = d3.scalePoint().domain(yDomain).range(yRange);
+  const xAxis = d3.scalePoint().domain(xDomain).range(xRange);
+  const yAxis = d3.scaleLinear().domain(yDomain).range(yRange);
 
-  const xDomain = df.Xs.map(d => moment(d).utc().format('MMM'));
-  const xRange = [15, width + 15];
-  const xAxis = d3.scaleLinear().domain(xDomain).range(xRange);
+  return {area, yAxis, xAxis, xDomain, yDomain};
+};
+
+export default function AreaChart(props) {
+  const {data, style, width = Width, height = Height} = props;
+  // const {area, xAxis, yAxis} = makeArea({data, width, height});
+  const [html, setHtml] = React.useState('');
+
+  React.useEffect(() => {
+    console.log(Area_Chart)
+    setHtml('file');
+  }, []);
 
   return (
-    <View style={style}>
-      <Svg {...{width, height, ...svgStyle}}>
-        <Axis.VerticalAxis
-          y={yAxis}
-          data={data}
-          width={width}
-          height={height}
-        />
-        <Axis.HorizontalAxis
-          x={xAxis}
-          data={data}
-          width={width}
-          height={height}
-          xTicks={xDomain}
-        />
-        <Path d={area(data, width, height)} fill="steelblue" strokeWidth={2} />
-      </Svg>
+    <View style={{flex: 1}}>
+      <WebView
+        originWhitelist={['*']}
+        style={{flex: 1, width: 300}}
+        allowFileAccess={true}
+        source={{uri:'file:///android_asset/area-chart.html'}}
+
+      />
     </View>
   );
 }

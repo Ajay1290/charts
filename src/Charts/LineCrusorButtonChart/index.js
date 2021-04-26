@@ -39,8 +39,8 @@ const lineGenerator = (data, width, height) => {
   const xDomain = [df.minXs(), df.maxXs()];
   const yDomain = [df.minYs(), df.maxYs()];
 
-  const xRange = [labelArea, width + labelArea];
-  const yRange = [height - labelArea, labelArea];
+  const xRange = [0, width];
+  const yRange = [height, 0];
 
   let x = d3.scaleLinear().domain(xDomain).range(xRange);
   if (xDomain[0] instanceof Date) {

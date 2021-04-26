@@ -12,6 +12,7 @@ import LineLabelScreen from './Charts/LineLabelChart/screen';
 import LineCursorScreen from './Charts/LineCursorChart/screen';
 import PieChartAnimatedScreen from './Charts/PieChartAnimated/screen';
 import LineCursorButtonScreen from './Charts/LineCrusorButtonChart/screen';
+import Object3D from './Charts/3dObject';
 
 const Drawer = createDrawerNavigator();
 
@@ -33,14 +34,9 @@ export default function App() {
         <Drawer.Screen name="Bouble Chart" component={BoubleScreen} />
         <Drawer.Screen name="Line-Label Chart" component={LineLabelScreen} />
         <Drawer.Screen name="Line-Cursor Chart" component={LineCursorScreen} />
-        <Drawer.Screen
-          name="PieChart Animated"
-          component={PieChartAnimatedScreen}
-        />
-        <Drawer.Screen
-          name="LineCursorButtonScreen Animated"
-          component={LineCursorButtonScreen}
-        />
+        <Drawer.Screen name="PieChart Animated" component={PieChartAnimatedScreen} />
+        <Drawer.Screen name="3D Object" component={Object3D} />
+        <Drawer.Screen name="LineCursorButtonScreen Animated" component={LineCursorButtonScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

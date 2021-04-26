@@ -10,31 +10,17 @@ const tickPoints = (min, max, ticks) => {
   return range;
 };
 
+const common = {fill: '#000', stroke: '#44444477', strokeWidth: '2'};
+
 export function VerticalAxis(props) {
-  const {y = null, data, width, height, yTicks=null} = props;
-  const df = new DataFrame({data});
-  const yTicksDefault = tickPoints(df.minYs(), df.maxYs(), 5);
+  const {yAxis, data, width, height} = props;
   return (
     <G transform={'translate(0, 0)'}>
-      <Line
-        x1={15}
-        y1={0}
-        x2={15}
-        y2={height}
-        fill="#000"
-        stroke="#44444477"
-        strokeWidth="2"
-      />
-      {Array.from(yTicks != null ? yTicks : yTicksDefault).map((d, i) => {
+      <Line x1={15} y1={0} x2={15} y2={height} {...common} />
+      {yAxis.ticks(data.length).map((d, i) => {
         return (
-          <Text
-            key={i}
-            fill="#444"
-            fontSize={6}
-            textAnchor="start"
-            x={0}
-            y={y(d)}>
-            {i == 0 ? false : d}
+          <Text key={i} fill="#444" textAnchor="start" y={yAxis(d)}>
+            {d}
           </Text>
         );
       })}
@@ -43,29 +29,13 @@ export function VerticalAxis(props) {
 }
 
 export function HorizontalAxis(props) {
-  const {x = null, data, width, height, xTicks = null} = props;
-  const df = new DataFrame({data});
-  const xTicksDefault = tickPoints(df.minXs(), df.maxXs(), 5);
+  const {xAxis, data, width, height} = props;
   return (
     <G transform={'translate(0, 0)'}>
-      <Line
-        x1="0"
-        x2={width}
-        y1={height - 15}
-        y2={height - 15}
-        fill="#000"
-        stroke="#44444477"
-        strokeWidth="2"
-      />
-      {Array.from(xTicks != null ? xTicks : xTicksDefault).map((d, i) => (
-        <Text
-          x={x(d)}
-          y={height - 5}
-          key={'tick' + i}
-          fontSize={6}
-          fill="#444"
-          textAnchor="start">
-          {i == 0 ? false : d}
+      <Line x1="0" x2={width} y1={height - 15} y2={height - 15} {...common} />
+      {xAxis.ticks(data.length).map((d, i) => (
+        <Text key={i} fill="#444" x={xAxis(d)} y={height} textAnchor="start">
+          {d}
         </Text>
       ))}
     </G>
