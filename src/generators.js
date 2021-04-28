@@ -1,17 +1,14 @@
 import * as d3 from 'd3';
 
-export const pieGenerator = ({width, height, data}) => {
-  data = Array.from(data);
+export const pieGenerator = props => {
+  const {width, height, data, radius = Math.min(width, height) / 2} = props;
 
   const pie = d3
     .pie()
     .sort(null)
     .value(d => d.value);
 
-  const arc = d3
-    .arc()
-    .innerRadius(0)
-    .outerRadius(Math.min(width, height) / 2);
+  const arc = d3.arc().innerRadius(0).outerRadius(radius);
 
   const color = d3
     .scaleOrdinal()
@@ -24,9 +21,9 @@ export const pieGenerator = ({width, height, data}) => {
 
   const arcLabel = d3
     .arc()
-    .innerRadius((Math.min(width, height) / 2) * 0.8)
-    .outerRadius((Math.min(width, height) / 2) * 0.8);
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9);
 
   const arcs = pie(data);
-  return {arcs, arcLabel, color, arc};
+  return {arcs, arcLabel, color, arc, radius};
 };
