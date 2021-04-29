@@ -1,7 +1,15 @@
 import React from 'react';
 import {View, Animated} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import Svg, {G, Marker, Path, Polyline, Rect, Text, TSpan} from 'react-native-svg';
+import Svg, {
+  G,
+  Marker,
+  Path,
+  Polyline,
+  Rect,
+  Text,
+  TSpan,
+} from 'react-native-svg';
 import {RotationGestureHandler, State} from 'react-native-gesture-handler';
 import {pieGenerator} from '../../generators';
 
@@ -82,8 +90,8 @@ export default function PieChartAnimated(props) {
 
   const pieCorner = (d, rx, ry, h, ir) => {
     //  Calculating  right corner surface key points
-    var sxFirst = 0 * rx * Math.cos(d.endAngle);
-    var syFirst = 0 * ry * Math.sin(d.endAngle);
+    var sxFirst = ir * rx * Math.cos(d.endAngle);
+    var syFirst = ir * ry * Math.sin(d.endAngle);
     var sxSecond = rx * Math.cos(d.endAngle);
     var sySecond = ry * Math.sin(d.endAngle);
     var sxThird = sxSecond;
@@ -184,6 +192,26 @@ export default function PieChartAnimated(props) {
     });
   };
 
+  const labelAngle = (d, rx, ry) => {
+    const centerAngle = ((d.startAngle + d.endAngle) / 2) % (Math.PI * 2);
+    const radianNumber = 180 / Math.PI;
+
+    console.log(centerAngle * radianNumber, d.data.label);
+    let angleAddition = 0;
+    if (
+      centerAngle % (Math.PI * 2) >= Math.PI / 2 &&
+      centerAngle % (Math.PI * 2) < (Math.PI / 2) * 3
+    ) {
+      angleAddition = 180;
+    }
+
+    const diff = rx / ry;
+
+    const x = rx * 0.8 * Math.cos(centerAngle);
+    const y = ry * 0.8 * Math.sin(centerAngle);
+    return `translate(${x},${y})`;
+  };
+
   const midAngle = d => d.startAngle + (d.endAngle - d.startAngle) / 2;
 
   const points = d => {
@@ -198,7 +226,7 @@ export default function PieChartAnimated(props) {
     return 'translate(' + pos + ')';
   };
 
-  const Labels = () => {
+  const Labels = (rx, ry) => {
     return Array.from(arcs).map((d, i) => (
       <Text
         key={'label' + i}
@@ -207,7 +235,7 @@ export default function PieChartAnimated(props) {
         x={0}
         y={0.7}
         textAnchor={midAngle(d) < Math.PI ? 'start' : 'end'}
-        transform={labelPos(d)}>
+        transform={labelAngle(d, rx, ry)}>
         {d.endAngle - d.startAngle > 0.25 ? (
           <G key={'Gr' + i}>
             <TSpan key={'lab' + i} y="-0.4em" fontWeight="bold">
@@ -291,7 +319,7 @@ export default function PieChartAnimated(props) {
                   </Animated.View>
                 ))}
               </G>
-              {/* <G>
+              <G>
                 {Array.from(arcs).map((d, i) => (
                   <Polyline
                     key={'p' + i}
@@ -301,8 +329,8 @@ export default function PieChartAnimated(props) {
                     strokeWidth="1"
                   />
                 ))}
-                <Labels />
-              </G> */}
+                <Labels rx={100} ry={100} />
+              </G>
             </Svg>
           </Animated.View>
         </Animated.View>

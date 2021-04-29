@@ -1,9 +1,13 @@
 const data = [
-  {x: 0, y: 0, label: 'A'},
-  {x: 10, y: 1, label: 'A'},
-  {x: 20, y: 2, label: 'A'},
-  {x: 30, y: 3, label: 'A'},
-  {x: 40, y: 4, label: 'A'},
+  {x: 'Jan', y: 10},
+  {x: 'Feb', y: 21},
+  {x: 'Mar', y: 23},
+  {x: 'Apr', y: 53},
+  {x: 'May', y: 14},
+  {x: 'June', y: 24},
+  {x: 'July', y: 26},
+  {x: 'Sep', y: 45},
+  {x: 'Oct', y: 4},
 ];
 
 export default data;

@@ -124,7 +124,7 @@ export default function PieChart(props) {
             />
           ))}
           <Labels />
-        </G>
+        </G>`
       </Svg>
     </View>
   );

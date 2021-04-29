@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import PieScreen from './Charts/PieChart/screen';
 import LineScreen from './Charts/LineChart/screen';
 import BarScreen from './Charts/BarChart/screen';
+import HorizontalBarScreen from './Charts/HorizontalBarChart/screen';
 import AreaScreen from './Charts/AreaChart/screen';
 import BoubleScreen from './Charts/BoubleChart/screen';
 import LineToolTipScreen from './Charts/LineToolTipChart/screen';
@@ -27,16 +28,23 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="PieScreen" component={PieScreen} />
-        <Drawer.Screen name="LineScreen" component={LineScreen} />
-        <Drawer.Screen name="BarScreen" component={BarScreen} />
+        <Drawer.Screen name="Pie Chart" component={PieScreen} />
+        <Drawer.Screen name="Line Chart" component={LineScreen} />
+        <Drawer.Screen name="Bar Chart" component={BarScreen} />
+        <Drawer.Screen
+          name="Horizontal Bar Chart"
+          component={HorizontalBarScreen}
+        />
         <Drawer.Screen name="Area Chart" component={AreaScreen} />
         <Drawer.Screen name="Bouble Chart" component={BoubleScreen} />
         <Drawer.Screen name="Line-Label Chart" component={LineLabelScreen} />
         <Drawer.Screen name="Line-Cursor Chart" component={LineCursorScreen} />
-        <Drawer.Screen name="PieChart Animated" component={PieChartAnimatedScreen} />
+        <Drawer.Screen name="3D PieChart" component={PieChartAnimatedScreen} />
         <Drawer.Screen name="3D Object" component={Object3D} />
-        <Drawer.Screen name="LineCursorButtonScreen Animated" component={LineCursorButtonScreen} />
+        <Drawer.Screen
+          name="LineCursorButtonScreen Animated"
+          component={LineCursorButtonScreen}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

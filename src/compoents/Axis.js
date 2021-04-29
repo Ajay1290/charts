@@ -19,7 +19,12 @@ export function VerticalAxis(props) {
       <Line x1={15} y1={0} x2={15} y2={height} {...common} />
       {yAxis.ticks(data.length).map((d, i) => {
         return (
-          <Text key={i} fill="#444" textAnchor="start" y={yAxis(d)}>
+          <Text
+            key={i}
+            fontSize={8}
+            fill="#444"
+            textAnchor="start"
+            y={yAxis(d)}>
             {d}
           </Text>
         );
@@ -34,7 +39,13 @@ export function HorizontalAxis(props) {
     <G transform={'translate(0, 0)'}>
       <Line x1="0" x2={width} y1={height - 15} y2={height - 15} {...common} />
       {xAxis.ticks(data.length).map((d, i) => (
-        <Text key={i} fill="#444" x={xAxis(d)} y={height} textAnchor="start">
+        <Text
+          key={i}
+          fill="#444"
+          fontSize={8}
+          x={xAxis(d)}
+          y={height}
+          textAnchor="start">
           {d}
         </Text>
       ))}
