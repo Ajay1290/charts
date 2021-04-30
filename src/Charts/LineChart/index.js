@@ -38,18 +38,8 @@ export default function LineChart({data, style, svgStyle}) {
   return (
     <View style={style}>
       <Svg {...{width, height, ...svgStyle}}>
-        <Axis.VerticalAxis
-          y={yAxis}
-          data={data}
-          width={width}
-          height={height}
-        />
-        <Axis.HorizontalAxis
-          x={xAxis}
-          data={data}
-          width={width}
-          height={height}
-        />
+        <Axis.VerticalAxis {...{data, width, height, yAxis}} />
+        <Axis.HorizontalAxis {...{data, width, height, xAxis}} />
         <Path d={line} fill="transparent" stroke="#367be2" strokeWidth={2} />
       </Svg>
     </View>

@@ -13,10 +13,16 @@ const tickPoints = (min, max, ticks) => {
 const common = {fill: '#000', stroke: '#44444477', strokeWidth: '2'};
 
 export function VerticalAxis(props) {
-  const {yAxis, data, width, height} = props;
+  const {yAxis, data, width, height, paddingArea = 15} = props;
   return (
     <G transform={'translate(0, 0)'}>
-      <Line x1={15} y1={0} x2={15} y2={height} {...common} />
+      <Line
+        x1={paddingArea}
+        y1={0}
+        x2={paddingArea}
+        y2={height - paddingArea}
+        {...common}
+      />
       {yAxis.ticks(data.length).map((d, i) => {
         return (
           <Text
@@ -24,6 +30,7 @@ export function VerticalAxis(props) {
             fontSize={8}
             fill="#444"
             textAnchor="start"
+            x={paddingArea == 15 ? 0 : 5}
             y={yAxis(d)}>
             {d}
           </Text>
@@ -34,10 +41,16 @@ export function VerticalAxis(props) {
 }
 
 export function HorizontalAxis(props) {
-  const {xAxis, data, width, height} = props;
+  const {xAxis, data, width, height, paddingArea = 15} = props;
   return (
     <G transform={'translate(0, 0)'}>
-      <Line x1="0" x2={width} y1={height - 15} y2={height - 15} {...common} />
+      <Line
+        x1={paddingArea}
+        x2={width}
+        y1={height - paddingArea}
+        y2={height - paddingArea}
+        {...common}
+      />
       {xAxis.ticks(data.length).map((d, i) => (
         <Text
           key={i}
@@ -45,8 +58,8 @@ export function HorizontalAxis(props) {
           fontSize={8}
           x={xAxis(d)}
           y={height}
-          textAnchor="start">
-          {d}
+          textAnchor="middle">
+          {d instanceof Date ? moment(d).format('ddd') : d}
         </Text>
       ))}
     </G>

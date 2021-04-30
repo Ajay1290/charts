@@ -82,11 +82,12 @@ export default function PieChart(props) {
         transform={labelPos(d)}>
         {d.endAngle - d.startAngle > 0.25 ? (
           <G key={'Gr' + i}>
-            <TSpan key={'lab' + i} y="-0.4em" fontWeight="bold">
-              {d.data.label}
-            </TSpan>
-            <TSpan key={'value' + i} x="0" y="0.7em">
-              {d.data.value.toLocaleString()}
+            <TSpan
+              key={'lab' + i}
+              y="0.4em"
+              x={midAngle(d) < Math.PI ? '0.4em' : '-3em'}
+              fontWeight="bold">
+              {d.data.label}, {d.data.value.toLocaleString()}
             </TSpan>
           </G>
         ) : (
@@ -119,12 +120,12 @@ export default function PieChart(props) {
               key={'s' + i}
               points={points(d)}
               fill="none"
-              stroke="#444"
+              stroke="#44444499"
               strokeWidth="1"
             />
           ))}
           <Labels />
-        </G>`
+        </G>
       </Svg>
     </View>
   );

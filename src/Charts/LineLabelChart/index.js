@@ -55,12 +55,7 @@ export default function LineLabelChart({data, style, svgStyle}) {
   return (
     <View style={style}>
       <Svg {...{width, height, ...svgStyle}} viewBox={[0, 0, width, height]}>
-        <Axis.HorizontalAxis
-          x={xAxis}
-          data={data}
-          width={width}
-          height={height}
-        />
+        <Axis.HorizontalAxis {...{xAxis, width, height, data}} />
         {series.map((d, i) => (
           <G key={'g' + i}>
             <Path key={i} d={line(d)} stroke={z(d[0].key)} strokeWidth={1.5} />

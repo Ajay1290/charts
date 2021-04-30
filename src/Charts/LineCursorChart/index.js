@@ -79,8 +79,8 @@ export default class LineCursorChart extends React.Component {
     return (
       <View>
         <Svg {...{width, height}}>
-          <Axis.VerticalAxis data={this.state.data} width={width} height={height} y={this.scaleY} />
-          <Axis.HorizontalAxis data={this.state.data} width={width} height={height} x={this.scaleX} />
+          <Axis.VerticalAxis data={this.state.data} width={width} height={height} yAxis={this.scaleY} />
+          <Axis.HorizontalAxis data={this.state.data} width={width} height={height} xAxis={this.scaleX} />
           <Defs>
             <LinearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="gradient">
               <Stop stopColor="#CDE3F8" offset="0%" />

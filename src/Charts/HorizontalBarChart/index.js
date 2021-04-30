@@ -35,24 +35,25 @@ export default function HorizontalBarChart(props) {
       <Svg {...{width, height, ...svgStyle}} viewBox={[0, 0, width, height]}>
         <VerticalAxis {...{width, height, y, yAxis}} />
         {Array.from(data).map((d, i) => (
-          <>
-            <Rect
-              fill="steelblue"
-              x={x(0)}
-              y={y(i)}
-              width={x(d.x) - x(0)}
-              height={y.bandwidth()}
-            />
-            <Text
-              key={i}
-              fontSize={8}
-              fill="#444"
-              textAnchor="start"
-              x={x(d.x) + 5}
-              y={y(i) + 15}>
-              {d.x}
-            </Text>
-          </>
+          <Rect
+            key={i}
+            fill="steelblue"
+            x={x(0)}
+            y={y(i)}
+            width={x(d.x) - x(0)}
+            height={y.bandwidth()}
+          />
+        ))}
+        {Array.from(data).map((d, i) => (
+          <Text
+            key={i}
+            fontSize={8}
+            fill="#444"
+            textAnchor="start"
+            x={x(d.x) + 5}
+            y={y(i) + 15}>
+            {d.x}
+          </Text>
         ))}
       </Svg>
     </View>
@@ -65,9 +66,9 @@ const VerticalAxis = props => {
     <G transform={'translate(0, 0)'}>
       <Line
         x1={paddingArea}
-        y1={0}
+        y1={15}
         x2={paddingArea}
-        y2={height}
+        y2={height - 15}
         {...{fill: '#000', stroke: '#44444477', strokeWidth: '2'}}
       />
       {yAxis.map((d, i) => {
@@ -78,7 +79,7 @@ const VerticalAxis = props => {
             fill="#444"
             textAnchor="start"
             x={0}
-            y={y(i) + 15}>
+            y={y(0) - y(i) + 40}>
             {d}
           </Text>
         );
