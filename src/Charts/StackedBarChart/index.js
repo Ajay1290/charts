@@ -33,7 +33,7 @@ export default function StackedBarChart(props) {
   const x1Domain = data.map(d => d.category);
   const y1Domain = [0, d3.max(series, d => d3.max(d, d => d[1]))];
 
-  const x = d3.scaleBand().domain(x1Domain).range(xRange).padding(0.1);
+  const x = d3.scaleBand().domain(x1Domain).range(xRange).padding(0.2);
   const y = d3.scaleLinear().domain(y1Domain).range(yRange);
   const color = d3.scaleOrdinal().domain(keys).range(d3.schemeTableau10);
 
@@ -45,25 +45,38 @@ export default function StackedBarChart(props) {
       <Svg {...{width, height, ...svgStyle}} viewBox={[0, 0, width, height]}>
         <Axis.VerticalAxis {...{width, height, data, yAxis, paddingArea}} />
         <HorizontalAxis {...{width, height, xAxis, x}} />
-        {Array.from(series).map((ser, i) => (
-          <>
-            {Array.from(ser).map((d, i) => (
-              <Rect
-                key={i}
-                fill={color(d[3])}
-                stroke="#444"
-                x={x(d[2])}
-                y={y(d[1])}
-                height={y(d[0]) - y(d[1])}
-                width={x.bandwidth()}
-              />
-            ))}
-          </>
-        ))}
+        {Array.from(series).map((ser, i) =>
+          Array.from(ser).map((d, i) => (
+            <Rect
+              key={i}
+              fill={color(d[3])}
+              stroke="#444"
+              x={x(d[2])}
+              y={y(d[1])}
+              height={y(d[0]) - y(d[1])}
+              width={x.bandwidth()}
+            />
+          )),
+        )}
       </Svg>
     </View>
   );
 }
+
+// {graphs.map((graph, index) => (
+//   <TouchableWithoutFeedback
+//     key={graph.label}
+//     onPress={() => {
+//       previous.value = current.value;
+//       transition.value = 0;
+//       current.value = index;
+//       transition.value = withTiming(1);
+//     }}>
+//     <Animated.View style={[{padding: 16, width: BUTTON_WIDTH}]}>
+//       <Text style={styles.label}>{graph.label}</Text>
+//     </Animated.View>
+//   </TouchableWithoutFeedback>
+// ))}
 
 const HorizontalAxis = props => {
   const {xAxis, x, width, height} = props;
@@ -92,4 +105,3 @@ const HorizontalAxis = props => {
     </G>
   );
 };
-

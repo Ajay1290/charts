@@ -46,7 +46,7 @@ export function HorizontalAxis(props) {
     <G transform={'translate(0, 0)'}>
       <Line
         x1={paddingArea}
-        x2={width}
+        x2={width - paddingArea}
         y1={height - paddingArea}
         y2={height - paddingArea}
         {...common}
