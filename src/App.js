@@ -8,10 +8,9 @@ import BarScreen from './Charts/BarChart/screen';
 import HorizontalBarScreen from './Charts/HorizontalBarChart/screen';
 import AreaScreen from './Charts/AreaChart/screen';
 import BoubleScreen from './Charts/BoubleChart/screen';
-import LineToolTipScreen from './Charts/LineToolTipChart/screen';
 import LineLabelScreen from './Charts/LineLabelChart/screen';
 import LineCursorScreen from './Charts/LineCursorChart/screen';
-import PieChartAnimatedScreen from './Charts/PieChartAnimated/screen';
+import PieChart3DScreen from './Charts/PieChart3D/screen';
 import LineCursorButtonScreen from './Charts/LineCrusorButtonChart/screen';
 import Object3D from './Charts/3dObject';
 import StackedAreaScreen from './Charts/StackedAreaChart/screen';
@@ -46,7 +45,7 @@ export default function App() {
         <Drawer.Screen name="Bouble Chart" component={BoubleScreen} />
         <Drawer.Screen name="Line-Label Chart" component={LineLabelScreen} />
         <Drawer.Screen name="Line-Cursor Chart" component={LineCursorScreen} />
-        <Drawer.Screen name="3D PieChart" component={PieChartAnimatedScreen} />
+        <Drawer.Screen name="3D PieChart" component={PieChart3DScreen} />
         <Drawer.Screen name="3D Object" component={Object3D} />
         <Drawer.Screen
           name="LineCursorButtonScreen Animated"

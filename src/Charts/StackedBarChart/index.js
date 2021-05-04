@@ -6,6 +6,8 @@ import DataFrame from '../../utils/DataFrame';
 import Axis from '../../compoents/Axis';
 import * as d3 from 'd3';
 import moment from 'moment';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { withTiming } from 'react-native-reanimated';
 
 const GRAPH_MARGIN = 10;
 const SVGHeight = 300;
@@ -62,21 +64,6 @@ export default function StackedBarChart(props) {
     </View>
   );
 }
-
-// {graphs.map((graph, index) => (
-//   <TouchableWithoutFeedback
-//     key={graph.label}
-//     onPress={() => {
-//       previous.value = current.value;
-//       transition.value = 0;
-//       current.value = index;
-//       transition.value = withTiming(1);
-//     }}>
-//     <Animated.View style={[{padding: 16, width: BUTTON_WIDTH}]}>
-//       <Text style={styles.label}>{graph.label}</Text>
-//     </Animated.View>
-//   </TouchableWithoutFeedback>
-// ))}
 
 const HorizontalAxis = props => {
   const {xAxis, x, width, height} = props;
