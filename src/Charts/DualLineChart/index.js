@@ -54,9 +54,8 @@ export default function DualLineChart({data, style, svgStyle}) {
     series.push(ser);
   });
 
-  console.log(series);
-
   const color = d3.scaleOrdinal().domain(keys).range(d3.schemeTableau10);
+
   return (
     <View style={style}>
       <Svg {...{width, height, ...svgStyle}}>

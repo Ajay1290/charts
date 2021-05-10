@@ -137,7 +137,7 @@ export default function PieChart(props) {
               d={arc(d)}
               stroke="#FFF"
               ref={ref => (slices[i] = ref)}
-              fill={color(d.data.label)}
+              fill={d.data.color}
               onPress={() => sliceOnPress(d, i)}
             />
           ))}
@@ -148,7 +148,7 @@ export default function PieChart(props) {
               key={'label' + i}
               fontSize={8}
               ref={ref => (labelValues[i] = ref)}
-              fill="#333"
+              fill={d.data.labelColor}
               opacity={0}
               x={arcLabel.centroid(d)[0]}
               y={arcLabel.centroid(d)[1]}>
