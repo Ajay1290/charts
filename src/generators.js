@@ -23,8 +23,8 @@ export const pieGenerator = props => {
 
   const arcLabel = d3
     .arc()
-    .innerRadius(radius * 0.9)
-    .outerRadius(radius * 0.9);
+    .innerRadius(radius)
+    .outerRadius(radius * 0.5);
 
   const arcs = pie(data);
   return {arcs, arcLabel, color, arc, radius};
