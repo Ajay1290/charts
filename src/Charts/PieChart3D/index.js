@@ -249,15 +249,6 @@ export default function PieChart3D(props) {
             ))}
           </G>
           <G>
-            {/* {Array.from(arcs).map((d, i) => (
-              <Polyline
-                key={'p' + i}
-                points={points(d, 1, 1, 100)}
-                fill="none"
-                stroke="#44444499"
-                strokeWidth="1"
-              />
-            ))} */}
             <Labels rx={100} ry={100} />
           </G>
         </Svg>

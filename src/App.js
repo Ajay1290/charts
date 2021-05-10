@@ -15,6 +15,7 @@ import LineCursorButtonScreen from './Charts/LineCrusorButtonChart/screen';
 import Object3D from './Charts/3dObject';
 import StackedAreaScreen from './Charts/StackedAreaChart/screen';
 import StackedBarScreen from './Charts/StackedBarChart/screen';
+import DualLineScreen from './Charts/DualLineChart/screen';
 
 const Drawer = createDrawerNavigator();
 
@@ -31,26 +32,18 @@ export default function App() {
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Pie Chart" component={PieScreen} />
         <Drawer.Screen name="Line Chart" component={LineScreen} />
+        <Drawer.Screen name="Dual Line Chart" component={DualLineScreen} />
         <Drawer.Screen name="Bar Chart" component={BarScreen} />
-        <Drawer.Screen
-          name="Horizontal Bar Chart"
-          component={HorizontalBarScreen}
-        />
+        <Drawer.Screen name="Horizontal Bar Chart" component={HorizontalBarScreen} />
         <Drawer.Screen name="Stacked Bar Chart" component={StackedBarScreen} />
         <Drawer.Screen name="Area Chart" component={AreaScreen} />
-        <Drawer.Screen
-          name="Stacked Area Chart"
-          component={StackedAreaScreen}
-        />
+        <Drawer.Screen name="Stacked Area Chart" component={StackedAreaScreen} />
         <Drawer.Screen name="Bouble Chart" component={BoubleScreen} />
         <Drawer.Screen name="Line-Label Chart" component={LineLabelScreen} />
         <Drawer.Screen name="Line-Cursor Chart" component={LineCursorScreen} />
         <Drawer.Screen name="3D PieChart" component={PieChart3DScreen} />
         <Drawer.Screen name="3D Object" component={Object3D} />
-        <Drawer.Screen
-          name="LineCursorButtonScreen Animated"
-          component={LineCursorButtonScreen}
-        />
+        <Drawer.Screen name="LineCursorButtonScreen Animated" component={LineCursorButtonScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
