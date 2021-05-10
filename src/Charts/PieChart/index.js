@@ -168,7 +168,7 @@ export default function PieChart(props) {
                 cx={0}
                 stroke="#44444488"
                 cy={10 * i * 2}
-                fill={color(d.data.label)}
+                fill={d.data.color}
                 r={5}
               />
               <Text
